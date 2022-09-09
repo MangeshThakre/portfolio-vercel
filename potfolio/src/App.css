@@ -1,0 +1,23 @@
+h1 {
+  color: #374151;
+}
+
+body {
+  background-color: #ecf0f3;
+}
+.main-section {
+  display: flex;
+  /* justify-content: start; */
+  align-items: center;
+  flex-direction: column;
+  margin-top: 80px;
+  background-color: #ecf0f3;
+}
+
+.SkillView {
+  margin-bottom: 50px;
+}
+
+.projectView {
+  margin-bottom: 50px;
+}

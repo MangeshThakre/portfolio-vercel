@@ -1,0 +1,24 @@
+.category {
+  margin: 1rem 0;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  width: 40rem;
+  transition: baclgorund-color, 0.2s ease;
+}
+.category:hover {
+  background-color: #d7d7d7;
+}
+
+.project_card {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.show_paoject {
+  display: block;
+}
+.hide_project {
+  display: none;
+}

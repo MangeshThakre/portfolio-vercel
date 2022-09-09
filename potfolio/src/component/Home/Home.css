@@ -1,0 +1,100 @@
+.home-section {
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-section > p {
+  color: #59626f;
+  text-align: center;
+}
+
+#hifi:hover {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='60' height='60' viewport='0 0 100 100' style='fill:black;font-size:40px;'><text y='50%'>👋</text></svg>")
+      16 0,
+    auto;
+}
+
+.home-section > h1 {
+  color: #374151;
+  line-height: 2;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.home-section > h1 > span {
+  color: #1976d2;
+}
+
+.home-section-link {
+  display: flex;
+  margin: 3rem;
+  justify-content: space-between;
+  list-style-type: none;
+  width: 23rem;
+}
+.home-section-link > li {
+  width: 6rem;
+  height: 6rem;
+}
+
+.HashnodePng {
+  width: 1.5rem;
+}
+
+.home-section-link > li > a > div {
+  height: 4rem;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.45) -7px 15px 28px -12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-section-link > li > a > div:hover {
+  height: 4.4rem;
+  width: 4.4rem;
+}
+
+a:active {
+  color: none;
+}
+
+.linkedInUrl,
+.githubUrl,
+.hashnodeUrl {
+  color: #000000;
+  text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  .home-section {
+    padding: 1rem 2rem;
+    width: 100vw;
+    height: 80vh;
+  }
+
+  .home-section-link > li {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .home-section-link {
+    padding: 5rem 2rem 0 2rem;
+    margin: 0;
+  }
+  .home-section > h1 {
+    line-height: 2;
+    font-size: 27px;
+  }
+
+  .home-section-link > li > a > div {
+    height: 3rem;
+    width: 3rem;
+  }
+}

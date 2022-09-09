@@ -1,0 +1,130 @@
+.skill-section {
+  width: 75rem;
+  margin: 4rem 0;
+  line-height: 2;
+}
+
+.skill-section > .head > p {
+  color: #1976d2;
+  font-size: 1.2rem;
+}
+
+.skill-section > .head > h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.skillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.skillBox {
+  height: 7.5rem;
+  width: 16.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 1.1rem;
+}
+.skillBox > div {
+  height: 7rem;
+  width: 16rem;
+  border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.45) -7px 15px 28px -12px;
+  transition: all 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skillBox > div:hover {
+  height: 7.6rem;
+  width: 16.6rem;
+}
+
+.skillBox > div > h3 {
+  margin-left: 3rem;
+}
+
+.skillsContainer > .skillBox:nth-child(1) > div > img {
+  width: 3rem;
+}
+.skillsContainer > .skillBox:nth-child(2) > div > img {
+  width: 3.5rem;
+}
+.skillsContainer > .skillBox:nth-child(4) > div > img {
+  width: 5rem;
+}
+
+@media (max-width: 500px) {
+
+
+
+
+
+  .skill-section {
+    width: 100%;
+    margin: 4rem 0;
+    line-height: 2;
+    padding: 0 2rem;
+  }
+  
+
+  .skill-section > .head > h1 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .skillsContainer {
+    margin: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .skillBox > div,
+  .skillBox {
+    height: 4rem;
+    width: 8rem;
+    margin: 0;
+  }
+  .skillBox > div:hover {
+    height: 4rem;
+    width: 7.5rem;
+  }
+
+  .skillBox > div > h3 {
+    margin-left: 0px;
+    font-size: 1rem;
+  }
+
+  /* img */
+  div.skillBox:nth-child(1) > div:nth-child(1) > img:nth-child(1) {
+    width: 1.6rem;
+  }
+  div.skillBox:nth-child(2) > div:nth-child(1) > img:nth-child(1) {
+    width: 2rem;
+  }
+
+  div.skillBox:nth-child(3) > div:nth-child(1) > img:nth-child(1) {
+    width: 2rem;
+  }
+
+  div.skillBox:nth-child(4) > div:nth-child(1) > img:nth-child(1) {
+    width: 3rem;
+  }
+  div.skillBox:nth-child(5) > div:nth-child(1) > img:nth-child(1) {
+    width: 5rem;
+  }
+  div.skillBox:nth-child(6) > div:nth-child(1) > img:nth-child(1) {
+    width: 5rem;
+  }
+  div.skillBox:nth-child(7) > div:nth-child(1) > img:nth-child(1) {
+    width: 4rem;
+  }
+}

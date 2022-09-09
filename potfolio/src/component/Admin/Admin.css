@@ -1,0 +1,33 @@
+.Admin {
+  display: flex;
+  justify-content: center;
+}
+
+.containerr {
+  max-width: 80rem;
+  padding: 3rem;
+  flex-direction: column;
+}
+
+.containerr input {
+  width: 40rem;
+}
+
+.AdminImage {
+  height: 10rem;
+  width: 20rem;
+  border: solid gray;
+  margin: 2rem 0;
+}
+
+input[type="submit"] {
+  width: 8rem;
+  height: 3rem;
+  background-color: #1976d2;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  font-weight: 800;
+  cursor: pointer;
+}

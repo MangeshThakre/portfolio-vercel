@@ -1,0 +1,133 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  /* background-color: #131313; */
+  background-color: #ecf0f3;
+  z-index: 3;
+  transition: box-shadow 0.2s ease;
+}
+
+.container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-left {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  width: 25rem;
+}
+.nav-right > li {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #cdd2d7;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #ecf0f3;
+  transition: background-color 0.2s ease;
+}
+.nav-right > li:hover {
+  background-color: #dae8f8;
+}
+
+.hashnode > img {
+  width: 23px;
+}
+
+.skills > img {
+  width: 23px;
+}
+
+.menu-container {
+  display: none;
+}
+
+.menu {
+  width: 25px;
+  transform: rotate(90deg);
+  transition: all 0.3s ease;
+}
+
+/* SidebarMenu */
+
+.SidebarMenu::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100vh;
+  width: 100vh;
+  backdrop-filter: brightness(58%);
+  z-index: -1;
+}
+
+.SidebarMenu {
+  background-color: #ecf0f3;
+  position: absolute;
+  height: 100vh;
+  width: 80%;
+  top: 80px;
+  left: 0;
+  justify-content: center;
+  display: flex;
+}
+
+.SidebarMenu > ul {
+  list-style-type: none;
+  text-align: center;
+  margin-top: 35%;
+}
+
+.SidebarMenu > ul > li {
+  margin: 3rem 0;
+  color: #1976d2;
+  font-weight: bold;
+}
+
+@media (max-width: 500px) {
+  .nav {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .nav-left {
+    font-size: 1.5rem;
+  }
+
+  .nav-right > .home,
+  .nav-right > .About {
+    display: none;
+  }
+
+  .nav-right {
+    margin-left: 18%;
+  }
+
+  .nav-right > li {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .nav-right > li > img {
+    width: 18px;
+  }
+
+  /* .menu-container {
+    display: block;
+  } */
+}
