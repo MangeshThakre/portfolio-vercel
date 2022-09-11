@@ -6,9 +6,9 @@ const path = require("path");
 const fs = require("fs")
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    //  console.log(file.filename)
     cb(null, "uploads");
   },
+
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now();
     cb(null, uniqueSuffix + "-" + "-" + file.originalname);
@@ -61,7 +61,7 @@ function oldPicRemover(req, res, next) {
   function deleteoldpic(oldPic) {
     if (oldPic != "") {
       var oldPicname = oldPic.split("\\")[1];
-      const testFolder = path.join(__dirname, "../../uploads");
+      const testFolder = path.join(__dirname, "../uploads");
       fs.readdirSync(testFolder).forEach((file) => {
         if (oldPicname == file) fs.unlinkSync(testFolder + "/" + file);
       });
