@@ -18,7 +18,11 @@ function Projects({
   setLiveCategoryImg,
   setIsEdit,
   setIsSubcategory,
+  setProjectDiscription,
+  setIsCategoryHidden,
   setSubcategory,
+  categoryImg,
+  isCategoryHidden,
 }) {
   const [selectedCategory, setSelectedCategory] = useState({
     category: "",
@@ -36,19 +40,20 @@ function Projects({
 
   function editProject(e) {
     setIsEdit({ id: e._id, edit: true });
-
     setCategory(e.category);
-    setCategoryImg({ live: e.categoryImg });
+    setCategoryImg(e.categoryImg);
     setProjectName(e.projectName);
     setLiveLink(e.liveLink);
     setGithub(e.gitRepoLink);
-    setProjectImg({ live: e.projectImg });
+    setProjectImg(e.projectImg);
     setDisplay(e.display);
     setResponsive(e.responsive);
     setLiveProjectImg(e.projectImg);
     setLiveCategoryImg(e.categoryImg);
     setIsSubcategory(e.isSubcategory);
     setSubcategory(e.subCategory);
+    setProjectDiscription(e.ProjectDiscroption);
+    setIsCategoryHidden(e.isCategoryHidden);
   }
 
   function deleteProject(id) {
@@ -56,8 +61,7 @@ function Projects({
   }
 
   function categorys(e) {
-    let categoryImg =
-      URL + "/" + projectArr[category.indexOf(e)][0].categoryImg;
+    let categoryImg = projectArr[category.indexOf(e)][0].categoryImg;
     let selectedProjects = projectArr[category.indexOf(e)];
     return (
       <>
@@ -79,7 +83,14 @@ function Projects({
               style={{ width: "10rem", height: "80px", objectFit: "cover" }}
               alt="img"
             />
+
             <div>
+              <h3>
+                show Category :
+                {!projectArr[category.indexOf(e)][0].isCategoryHidden
+                  ? "✅"
+                  : "❌"}
+              </h3>
               <h3>Total Project : {projectArr[category.indexOf(e)].length}</h3>
             </div>
           </div>
@@ -95,7 +106,7 @@ function Projects({
             return (
               <div key={i} className="project_card">
                 <img
-                  src={URL + "/" + e.projectImg}
+                  src={e.projectImg}
                   alt={e.projectName}
                   style={{ width: "10rem", height: "80px", objectFit: "cover" }}
                 />

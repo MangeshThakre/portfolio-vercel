@@ -6,31 +6,32 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import Projects from "./projects/projects";
 import { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
-import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import Divider from "@mui/material/Divider";
 import CircularProgress from "@mui/material/CircularProgress";
-import { width } from "@mui/system";
 function Admin() {
   const URL = process.env.REACT_APP_API_URL;
 
   // category
   const [category, setCategory] = useState("NEW");
   const [isNewCategory, setIsNewCategory] = useState(false);
-  const [categoryImg, setCategoryImg] = useState({});
+  const [categoryImg, setCategoryImg] = useState("");
+  const [projectImg, setProjectImg] = useState("");
   const [projectName, setProjectName] = useState("");
   const [liveLink, setLiveLink] = useState("");
   const [gitHub, setGithub] = useState("");
-  const [projectImg, setProjectImg] = useState({});
-  const [projects, setProjects] = useState({});
   const [display, setDisplay] = useState(false);
   const [responsive, setResponsive] = useState(false);
+  const [isCategoryHidden, setIsCategoryHidden] = useState(false);
+  const [ProjectDiscroption, setProjectDiscription] = useState("");
   const [isEdit, setIsEdit] = useState({ id: "", edit: false });
   const [liveCategoryImg, setLiveCategoryImg] = useState("");
   const [liveProjectImg, setLiveProjectImg] = useState("");
   //  sub category
   const [isSubcategory, setIsSubcategory] = useState(false);
   const [subCategory, setSubcategory] = useState("");
+
+  const [projects, setProjects] = useState({});
   //
   const [isLoading, setIsLoading] = useState(false);
   let categoryArr = [];
@@ -42,18 +43,13 @@ function Admin() {
 
   useEffect(() => {
     if (categoryArr.includes(category)) {
-      setCategoryImg({
-        live: projectArr[categoryArr.indexOf(category)][0].categoryImg,
-      });
+      setCategoryImg(projectArr[categoryArr.indexOf(category)][0].categoryImg);
       setLiveCategoryImg(
         projectArr[categoryArr.indexOf(category)][0].categoryImg
       );
     }
     if (category === "NEW") {
-      setCategoryImg({
-        live: "",
-        raw: "",
-      });
+      setCategoryImg("");
     }
   }, [category]);
 
@@ -89,78 +85,47 @@ function Admin() {
     }
   }
 
-  // file reader
-  function previewFile(e, set) {
-    const file = e.files[0];
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      () => {
-        // convert image file to base64 string
-        set({
-          base64: reader.result,
-          raw: file,
-          live: "",
-        });
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
-
   // submit
   async function submit(e) {
     e.preventDefault();
     setIsLoading(true);
-
-    const catImg = categoryImg.raw ? categoryImg.raw : categoryImg.live;
-    const pojImg = projectImg.raw ? projectImg.raw : projectImg.live;
-
-    const oldCatImg = categoryImg.raw ? liveCategoryImg : "";
-    const oldprojectImg = projectImg.raw ? liveProjectImg : "";
-
-    const formData = new FormData();
-    formData.append("category", category);
-    if (categoryImg.raw) {
-      formData.append("categoryImg", categoryImg.raw);
-      formData.append("categoryImgRaw", true);
-    } else if (categoryImg.live) {
-      formData.append("categoryImg", liveCategoryImg);
-      formData.append("categoryImgRaw", false);
+    let updateCatecory = false;
+    if (
+      categoryImg != projectArr[categoryArr.indexOf(category)][0].categoryImg ||
+      isCategoryHidden !=
+        projectArr[categoryArr.indexOf(category)][0].isCategoryHidden
+    ) {
+      updateCatecory = true;
+    } else {
+      updateCatecory = false;
     }
 
-    if (projectImg.raw) {
-      formData.append("projectImg", projectImg.raw);
-      formData.append("projectImgRaw", true);
-    } else if (projectImg.live) {
-      formData.append("projectImg", liveProjectImg);
-      formData.append("projectImgRaw", false);
-    }
-    formData.append("projectName", projectName);
-    formData.append("liveLink", liveLink);
-    formData.append("gitHub", gitHub);
-    formData.append("display", display);
-    formData.append("responsive", responsive);
-    formData.append("isSubcategory", isSubcategory);
-    formData.append("subCategory", subCategory);
     if (isEdit.edit) {
+      const projectData = {
+        category,
+        categoryImg,
+        isCategoryHidden,
+        isSubcategory,
+        subCategory,
+        projectImg,
+        projectName,
+        liveLink,
+        gitHub,
+        ProjectDiscroption,
+        display,
+        responsive,
+      };
       try {
         const response = await axios({
           method: "post",
           url:
             URL +
-            "/api/edit_project?oldCatImg=" +
-            oldCatImg +
-            "&oldprojectImg=" +
-            oldprojectImg +
-            "&id=" +
-            isEdit.id,
-
+            "/api/edit_project?id=" +
+            isEdit.id +
+            "&updateCatecory=" +
+            updateCatecory,
           headers: { "content-type": "application/json" },
-          data: formData,
+          data: projectData,
         });
         const data = await response.data;
         setIsLoading(false);
@@ -169,29 +134,32 @@ function Admin() {
         setIsLoading(false);
         console.log(error);
       }
-
-      // console.table({
-      //   category,
-      //   catImg,
-      //   projectName,
-      //   liveLink,
-      //   pojImg,
-      //   gitHub,
-      //   display,
-      //   responsive,
-      //   oldCatImg,
-      //   oldprojectImg,
-      // });
     } else {
       try {
+        const projectData = {
+          category,
+          categoryImg,
+          isCategoryHidden,
+          isSubcategory,
+          subCategory,
+          projectImg,
+          projectName,
+          liveLink,
+          gitHub,
+          ProjectDiscroption,
+          display,
+          responsive,
+        };
+
         const response = await axios({
           method: "post",
           url: URL + "/api/insert_project",
           headers: { "content-type": "application/json" },
-          data: formData,
+          data: projectData,
         });
         const data = await response.data;
         window.location.reload();
+
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -236,17 +204,33 @@ function Admin() {
                 disabled={!isNewCategory}
               />
               <div>
-                <Button variant="contained" component="label">
-                  {!isNewCategory ? "Update img" : "Upload img"}
-                  <input
-                    hidden
-                    accept="image/*"
-                    multiple
-                    type="file"
-                    onChange={(e) => previewFile(e.target, setCategoryImg)}
-                  />
-                </Button>
+                <TextField
+                  id="standard-basic"
+                  label="Category image url"
+                  variant="standard"
+                  sx={{ width: "50%" }}
+                  onChange={(e) => setCategoryImg(e.target.value)}
+                  required
+                  value={categoryImg}
+                  // disabled={!isNewCategory}
+                />
               </div>
+            </div>
+
+            {/* categdory Display */}
+            <div
+              style={{
+                backgroundColor: isCategoryHidden ? "red" : "green",
+                width: "",
+              }}
+            >
+              <input
+                id="catedgory_display"
+                type="checkbox"
+                checked={isCategoryHidden}
+                onChange={() => setIsCategoryHidden(!isCategoryHidden)}
+              />
+              <label htmlFor="catedgory_display">Hide whole category</label>
             </div>
 
             {/* categoryimg */}
@@ -254,24 +238,16 @@ function Admin() {
               <div className="AdminImage">
                 <img
                   style={{ width: "100%", height: "100%" }}
-                  src={
-                    categoryImg.live
-                      ? URL + "/" + categoryImg.live
-                      : categoryImg.base64
-                  }
+                  src={categoryImg ? categoryImg : liveCategoryImg}
                   alt="category img"
                 />
               </div>
-              <IconButton
-                onClick={() => setCategoryImg({ live: "", raw: "", url: "" })}
-              >
+              <IconButton onClick={() => setCategoryImg("")}>
                 <ReplayIcon />
               </IconButton>
 
               {isEdit.edit ? (
-                <IconButton
-                  onClick={() => setCategoryImg({ live: liveCategoryImg })}
-                >
+                <IconButton onClick={() => setCategoryImg(liveCategoryImg)}>
                   reset to live
                 </IconButton>
               ) : null}
@@ -344,37 +320,40 @@ function Admin() {
               <div className="AdminImage">
                 <img
                   style={{ width: "100%", height: "100%" }}
-                  src={
-                    projectImg.live
-                      ? URL + "/" + projectImg.live
-                      : projectImg.base64
-                  }
+                  src={projectImg ? projectImg : liveProjectImg}
                   alt="project img"
                 />
               </div>
-              <IconButton
-                onClick={() => setProjectImg({ live: "", raw: "", url: "" })}
-              >
+              <IconButton onClick={() => setProjectImg()}>
                 <ReplayIcon />
               </IconButton>
               {isEdit.edit ? (
-                <IconButton
-                  onClick={() => setProjectImg({ live: liveProjectImg })}
-                >
+                <IconButton onClick={() => setProjectImg(liveProjectImg)}>
                   reset to live
                 </IconButton>
               ) : null}
             </div>
-            <Button variant="contained" component="label">
-              Upload img
-              <input
-                hidden
-                accept="image/*"
-                multiple
-                type="file"
-                onChange={(e) => previewFile(e.target, setProjectImg)}
-              />
-            </Button>
+
+            <TextField
+              id="standard-basic"
+              label="Project Image URL"
+              variant="standard"
+              sx={{ width: "50%" }}
+              value={projectImg}
+              required
+              onChange={(e) => setProjectImg(e.target.value)}
+            />
+
+            <div style={{ marginTop: "1rem" }}>
+              <label htmlFor="project_description">project description</label>
+              <textarea
+                rows={5}
+                value={ProjectDiscroption}
+                onChange={(e) => setProjectDiscription(e.target.value)}
+                id="project_description"
+                style={{ display: "block" }}
+              ></textarea>
+            </div>
 
             <div>
               <input
@@ -420,6 +399,10 @@ function Admin() {
               setLiveProjectImg={setLiveProjectImg}
               setIsSubcategory={setIsSubcategory}
               setSubcategory={setSubcategory}
+              setProjectDiscription={setProjectDiscription}
+              setIsCategoryHidden={setIsCategoryHidden}
+              categoryImg={categoryImg}
+              isCategoryHidden={isCategoryHidden}
             />
           </div>
         </div>

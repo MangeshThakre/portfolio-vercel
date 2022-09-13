@@ -7,11 +7,9 @@ node_modules/
 
 # testing
 /coverage
-
 *.env
 
 # production
-
 
 # misc
 .DS_Store

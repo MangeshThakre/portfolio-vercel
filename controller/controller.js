@@ -4,18 +4,13 @@ class controller {
     const category = req.body.category;
     const isSubcategory = req.body.isSubcategory;
     const subCategory = req.body.subCategory;
-
-    // const categoryImg = req.files.categoryImg[0].path;
-    let categoryImg = "";
-    if (req.body.categoryImgRaw == "true") {
-      categoryImg = req.files.categoryImg[0].path;
-    } else {
-      categoryImg = req.body.categoryImg;
-    }
+    const categoryImg = req.body.categoryImg;
+    const isCategoryHidden = req.body.isCategoryHidden;
     const projectName = req.body.projectName;
     const liveLink = req.body.liveLink;
     const gitRepoLink = req.body.gitHub;
-    const projectImg = req.files.projectImg[0].path;
+    const projectImg = req.body.projectImg;
+    const ProjectDiscroption = req.body.ProjectDiscroption;
     const responsive = req.body.responsive;
     const display = req.body.display;
 
@@ -25,6 +20,7 @@ class controller {
     const projectInfo = new projectModel({
       category,
       categoryImg,
+      isCategoryHidden,
       isSubcategory,
       subCategory,
       projectName,
@@ -33,16 +29,21 @@ class controller {
       projectImg,
       responsive,
       display,
+      ProjectDiscroption,
       created_at: new Date(),
     });
 
     // console.table({
     //   category,
     //   categoryImg,
+    //   isCategoryHidden,
+    //   isSubcategory,
+    //   subCategory,
+    //   projectImg,
     //   projectName,
     //   liveLink,
     //   gitRepoLink,
-    //   projectImg,
+    //   ProjectDiscroption,
     //   responsive,
     //   display,
     //   created_at: new Date(),
@@ -87,39 +88,46 @@ class controller {
 
   static async edit_project(req, res) {
     const id = req.query.id;
-
-    let projectImg = "";
-    if (req.body.projectImgRaw == "true") {
-      projectImg = req.files.projectImg[0].path;
-    } else {
-      projectImg = req.body.projectImg;
-    }
-
-    let categoryImg = "";
-    if (req.body.categoryImgRaw == "true") {
-      categoryImg = req.files.categoryImg[0].path;
-    } else {
-      categoryImg = req.body.categoryImg;
-    }
-
+    const updateCatecory = req.query.updateCatecory;
     const category = req.body.category;
     const isSubcategory = req.body.isSubcategory;
     const subCategory = req.body.subCategory;
+    const categoryImg = req.body.categoryImg;
+    const isCategoryHidden = req.body.isCategoryHidden;
     const projectName = req.body.projectName;
     const liveLink = req.body.liveLink;
     const gitRepoLink = req.body.gitHub;
-    const display = req.body.display;
+    const projectImg = req.body.projectImg;
+    const ProjectDiscroption = req.body.ProjectDiscroption;
     const responsive = req.body.responsive;
+    const display = req.body.display;
+
+    const projectInfo = {
+      category,
+      categoryImg,
+      isCategoryHidden,
+      isSubcategory,
+      subCategory,
+      projectName,
+      liveLink,
+      gitRepoLink,
+      projectImg,
+      responsive,
+      display,
+      ProjectDiscroption,
+    };
 
     let saveCategory = "";
-    if (req.body.categoryImgRaw == "true") {
+    if (updateCatecory == "true") {
       try {
-        saveCategory = await projectModel.updateMany(
+        await projectModel.updateMany(
           { category },
           {
-            $set: { categoryImg: categoryImg },
+            $set: {
+              categoryImg: categoryImg,
+              isCategoryHidden: isCategoryHidden,
+            },
           },
-
           { new: true }
         );
       } catch (error) {
@@ -134,37 +142,9 @@ class controller {
     try {
       const updateProject = await projectModel.findByIdAndUpdate(
         id,
-        {
-          // category,
-          // categoryImg,
-          isSubcategory,
-          subCategory,
-          projectName,
-          liveLink,
-          gitRepoLink,
-          projectImg,
-          responsive,
-          display,
-        },
+        projectInfo,
         { new: true }
       );
-
-      // console.log(updateProject);
-
-      // console.log(req.query);
-      // console.log(req.body);
-      // console.log(req.files);
-      // console.table({
-      //   category,
-      //   categoryImg,
-      //   projectName,
-      //   liveLink,
-      //   gitRepoLink,
-      //   projectImg,
-      //   responsive,
-      //   display,
-      // });
-
       res.json({
         status: 200,
         error: false,

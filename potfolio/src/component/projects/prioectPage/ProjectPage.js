@@ -16,7 +16,7 @@ function ProjectPage() {
   const CATEGORYARR = useSelector((state) => state.projectReducer.CategoryArr);
   const PROJECTARR = useSelector((state) => state.projectReducer.ProjectsArr);
   const projectImage =
-    URL + "/" + PROJECTARR[CATEGORYARR.indexOf(CATEGORY)][0]?.categoryImg;
+    PROJECTARR[CATEGORYARR.indexOf(CATEGORY)][0]?.categoryImg;
 
   ////////////////////////////////////////
   function groupBy(objectArray, property) {
@@ -53,10 +53,11 @@ function ProjectPage() {
         ) : null}
 
         {selectedProjectArr.map((e, i) => {
+          if (!e.display) return;
           return (
             <ProjectCard
               key={e + i}
-              projectImg={URL + "/" + e.projectImg}
+              projectImg={e.projectImg}
               gitURL={e.gitRepoLink}
               ProjectURL={e.liveLink}
               type="projects"
@@ -136,6 +137,7 @@ function ProjectPage() {
 
           {CATEGORYARR.map((e, i) => {
             if (e == CATEGORY) return;
+            if (PROJECTARR[i][0].isCategoryHidden) return;
             return (
               <Button
                 key={e}

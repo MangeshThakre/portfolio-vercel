@@ -125,7 +125,8 @@ function Projects() {
             ) : null}
 
             {CATEGORYARR.map((e, i, a) => {
-              const projectImage = URL + "/" + PROJECTARR[i][0].categoryImg;
+              if (PROJECTARR[i][0].isCategoryHidden) return;
+              const projectImage = PROJECTARR[i][0].categoryImg;
               const projectsNo = PROJECTARR[i].length;
               return (
                 <ProjectCard
