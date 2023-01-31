@@ -40,7 +40,7 @@ function Projects() {
       const response = await axios({
         method: "get",
         url: URL + "/api/fetchProject",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json" }
       });
       const data = await response.data.projects;
       let carr = [];
@@ -66,7 +66,7 @@ function Projects() {
   function funPrev() {
     projectContainer.scrollBy({
       left: -835,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }
 
@@ -74,7 +74,7 @@ function Projects() {
     projectContainer.scrollBy({
       // top: 0,
       left: +835,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }
 

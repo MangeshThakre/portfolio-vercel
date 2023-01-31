@@ -11,38 +11,21 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CodeIcon from "@mui/icons-material/Code";
 import skills from "../../assets/skillsimg.png";
 import { Page } from "../projects/ProjectSplice.js";
-import menu from "../../assets/more.svg";
 import { useSelector, useDispatch } from "react-redux";
-function Nav({ projectView, homeView, SkillsView, blogView, showNavShodow }) {
+function Nav({
+  projectView,
+  homeView,
+  SkillsView,
+  blogView,
+  showNavShodow,
+  aboutView,
+}) {
   const dispatch = useDispatch();
   const PAGE = useSelector((state) => state.projectReducer.Page);
-  const [click, setClick] = useState(false);
 
   const styleShadow = showNavShodow
     ? { boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" }
     : null;
-  // console.log(showNavShodow);
-
-  // useEffect(() => {
-  //   const menu = document.querySelector(".menu");
-  //   const [BODY, LENGTH] = document.getElementsByTagName("body");
-
-  //   click
-  //     ? (menu.style.transform = "rotate(0deg)")
-  //     : (menu.style.transform = "rotate(90deg)");
-  //   click ? (BODY.style.overflow = "hidden") : (BODY.style.overflow = "scroll");
-  // }, [click]);
-
-  // const SideBarMenu = (
-  //   <div className="SidebarMenu">
-  //     <ul>
-  //       <li>Home</li>
-  //       <li>Skills</li>
-  //       <li>Project</li>
-  //       <li>Hashnode</li>
-  //     </ul>
-  //   </div>
-  // );
 
   return (
     <div className="nav" style={styleShadow}>
@@ -73,7 +56,16 @@ function Nav({ projectView, homeView, SkillsView, blogView, showNavShodow }) {
             >
               <HomeIcon color="primary" />
             </li>
-            <li className="About">
+
+            <li
+              className="About"
+              onClick={() =>
+                aboutView.current.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                })
+              }
+            >
               <AccountCircleIcon color="primary" />
             </li>
             <li
@@ -111,15 +103,7 @@ function Nav({ projectView, homeView, SkillsView, blogView, showNavShodow }) {
             </li>
           </ul>
         ) : null}
-        {/* <div className="menu-container" onClick={() => setClick(!click)}>
-          <IconButton>
-            <img className="menu" src={menu} alt="menu" />
-          </IconButton>
-        </div> */}
       </div>
-
-      {/* side bar menu */}
-      {/* {click ? SideBarMenu : null} */}
     </div>
   );
 }

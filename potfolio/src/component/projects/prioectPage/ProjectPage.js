@@ -83,7 +83,7 @@ function ProjectPage() {
     const className = "projects-container" + i;
     document.getElementById(className).scrollBy({
       left: -835,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }
 
@@ -92,7 +92,7 @@ function ProjectPage() {
     document.getElementById(className).scrollBy({
       // top: 0,
       left: +835,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }
 

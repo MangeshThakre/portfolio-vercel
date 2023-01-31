@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import Nav from "./component/navbar/nav";
 import Home from "./component/Home/Home.js";
 import Skills from "./component/Skills/Skills.js";
+import About from "./component/About/About.js";
 import Projects from "./component/projects/Projects.js";
 
 import Blog from "./component/Blog/Blog";
@@ -15,8 +16,9 @@ import { Routes, Route, Link } from "react-router-dom";
 function App() {
   const PAGE = useSelector((state) => state.projectReducer.Page);
   const [showNavShodow, setShowNavShodow] = useState(false);
-  const projectView = useRef(null);
   const [homeView, setHomeView] = useState(null);
+  const projectView = useRef(null);
+  const aboutView = useRef(null);
   const blogView = useRef(null);
   const SkillsView = useRef(null);
 
@@ -39,6 +41,7 @@ function App() {
         SkillsView={SkillsView}
         homeView={homeView}
         blogView={blogView}
+        aboutView={aboutView}
         showNavShodow={showNavShodow}
       />
 
@@ -47,6 +50,8 @@ function App() {
           <>
             <div ref={homeView} className="homeView" />
             <Home />
+            {/* <div ref={aboutView} className="homeView" />
+            <About /> */}
             <div ref={SkillsView} className="SkillView" />
             <Skills />
             <div ref={projectView} className="projectView" />
