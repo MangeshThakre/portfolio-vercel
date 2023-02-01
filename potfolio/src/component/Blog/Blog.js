@@ -36,7 +36,7 @@ function Blog() {
         url: "https://api.hashnode.com/",
         method: "post",
         headers: { "Content-Type": "application/json" },
-        data: { query, variables },
+        data: { query, variables }
       });
 
       const data = await response.data;
@@ -53,14 +53,14 @@ function Blog() {
   function funPrev() {
     blogcontainer.current.scrollBy({
       left: -835,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }
 
   function funNext() {
     blogcontainer.current.scrollBy({
       left: +835,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   }
   ///hello
@@ -68,7 +68,7 @@ function Blog() {
     <div className="blog-section">
       <div className="head">
         <p>BLOGS</p>
-        <h1>what I've wrote</h1>
+        <h1>Technical blogs</h1>
       </div>
       <div className="blog-container" ref={blogcontainer}>
         <div className="previous" id="previous">

@@ -69,7 +69,7 @@ function Admin() {
     const response = await axios({
       method: "get",
       url: URL + "/api/fetchProject",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json" }
     });
     const data = await response.data;
     setProjects(data.projects);
@@ -90,17 +90,17 @@ function Admin() {
     e.preventDefault();
     setIsLoading(true);
     let updateCatecory = false;
-    if (
-      categoryImg != projectArr[categoryArr.indexOf(category)][0].categoryImg ||
-      isCategoryHidden !=
-        projectArr[categoryArr.indexOf(category)][0].isCategoryHidden
-    ) {
-      updateCatecory = true;
-    } else {
-      updateCatecory = false;
-    }
-
     if (isEdit.edit) {
+      if (
+        categoryImg !=
+          projectArr[categoryArr.indexOf(category)][0].categoryImg ||
+        isCategoryHidden !=
+          projectArr[categoryArr.indexOf(category)][0].isCategoryHidden
+      ) {
+        updateCatecory = true;
+      } else {
+        updateCatecory = false;
+      }
       const projectData = {
         category,
         categoryImg,
@@ -113,7 +113,7 @@ function Admin() {
         gitHub,
         ProjectDiscroption,
         display,
-        responsive,
+        responsive
       };
       try {
         const response = await axios({
@@ -125,11 +125,11 @@ function Admin() {
             "&updateCatecory=" +
             updateCatecory,
           headers: { "content-type": "application/json" },
-          data: projectData,
+          data: projectData
         });
         const data = await response.data;
-        setIsLoading(false);
         window.location.reload();
+        setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
         console.log(error);
@@ -148,14 +148,14 @@ function Admin() {
           gitHub,
           ProjectDiscroption,
           display,
-          responsive,
+          responsive
         };
-
+        console.log(projectData);
         const response = await axios({
           method: "post",
           url: URL + "/api/insert_project",
           headers: { "content-type": "application/json" },
-          data: projectData,
+          data: projectData
         });
         const data = await response.data;
         window.location.reload();
@@ -221,7 +221,7 @@ function Admin() {
             <div
               style={{
                 backgroundColor: isCategoryHidden ? "red" : "green",
-                width: "",
+                width: ""
               }}
             >
               <input
